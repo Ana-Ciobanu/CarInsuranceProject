@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+.env
+.venv/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Flask
+instance/
+.flaskenv
+
+# VS Code
+.vscode/
+
+# Migrations
+migrations/
+
+# Database
+*.db
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Others
+.idea/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.env
+.venv
+.flaskenv
+.vscode
+__pycache__/
+*.pyc
+.DS_Store
