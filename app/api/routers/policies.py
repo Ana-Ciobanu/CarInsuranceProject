@@ -3,6 +3,7 @@ from flask.views import MethodView
 from flask import request, current_app
 from api.schemas import PolicyIn, PolicyOut
 from services.policy_service import create_policy
+import structlog
 
 blp = Blueprint("policies", "policies", url_prefix="/api/cars/<int:carId>/policies", description="Policy endpoints")
 
@@ -22,6 +23,14 @@ class PolicyCreate(MethodView):
 		if status == 400:
 			db_session.close()
 			return {"message": "Invalid policy data"}, 400
+		structlog.get_logger().info(
+			"Policy created",
+			policy_id=policy.id,
+			car_id=policy.car_id,
+			start_date=str(policy.start_date),
+			end_date=str(policy.end_date),
+			provider=policy.provider
+		)
 		out = PolicyOut(
 			id=policy.id,
 			carId=policy.car_id,

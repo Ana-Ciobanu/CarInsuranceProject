@@ -3,6 +3,7 @@ from flask.views import MethodView
 from flask import request, current_app
 from api.schemas import ClaimIn, ClaimOut
 from services.claim_service import create_claim
+import structlog
 
 blp = Blueprint("claims", "claims", url_prefix="/api/cars/<int:carId>/claims", description="Claims endpoints")
 
@@ -22,6 +23,14 @@ class ClaimCreate(MethodView):
 		if status == 400:
 			db_session.close()
 			return {"message": "Invalid claim data"}, 400
+		structlog.get_logger().info(
+			"Claim created",
+			claim_id=claim.id,
+			car_id=claim.car_id,
+			claim_date=str(claim.claim_date),
+			amount=claim.amount,
+			description=claim.description
+		)
 		location = f"/api/cars/{carId}/claims/{claim.id}"
 		out = ClaimOut(
 			id=claim.id,

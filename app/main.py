@@ -14,12 +14,14 @@ from api.routers.history import blp as HistoryBlueprint
 from api.routers.validity import blp as ValidityBlueprint
 from api.routers.owners import blp as owners_blp
 from db.base import db
+from core.logging import setup_logging
 
-# Optionally, you can attach SessionLocal and engine to the app for use elsewhere
 def get_db_session():
     return SessionLocal()
 
+
 def create_app(db_url=None):
+    setup_logging()
     app = Flask(__name__)
     load_dotenv()
 
@@ -32,7 +34,6 @@ def create_app(db_url=None):
     app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
     app.config["SQLALCHEMY_DATABASE_URI"] = db_url or os.getenv("DATABASE_URL")
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
 
     # Use custom engine if needed
     db.init_app(app)

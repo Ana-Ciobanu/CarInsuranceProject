@@ -60,3 +60,16 @@ class CarsList(MethodView):
 		)
 		db_session.close()
 		return out.model_dump(by_alias=True), 201
+
+@blp.route("/<int:carId>", methods=["DELETE"])
+class CarDelete(MethodView):
+	def delete(self, carId):
+		db_session = current_app.session()
+		car = db_session.get(Car, carId)
+		if not car:
+			db_session.close()
+			return {"message": "Car not found"}, 404
+		db_session.delete(car)
+		db_session.commit()
+		db_session.close()
+		return {"message": f"Car {carId} and related claims/policies deleted."}, 200
