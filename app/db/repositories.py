@@ -51,7 +51,3 @@ class ClaimRepo:
     def list_for_car(self, car_id: int) -> list[Claim]:
         stmt = select(Claim).where(Claim.car_id==car_id).order_by(Claim.claim_date.asc(), Claim.id.asc())
         return list(self.db.scalars(stmt))
-
-def policies_for_car(db: Session, car_id: int) -> list[InsurancePolicy]:
-    stmt = select(InsurancePolicy).where(InsurancePolicy.car_id==car_id).order_by(InsurancePolicy.start_date.asc(), InsurancePolicy.id.asc())
-    return list(db.scalars(stmt))
