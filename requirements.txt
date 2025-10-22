@@ -9,3 +9,6 @@ pydantic
 pydantic-settings
 asgiref
 structlog
+# celery
+# redis
+apscheduler[redis]

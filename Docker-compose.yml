@@ -16,12 +16,22 @@ services:
     command: flask run --host=0.0.0.0
     environment:
       DATABASE_URL: ${DATABASE_URL}
+      REDIS_URL: redis://redis:6379/0
+      SCHEDULER_ENABLED: "True"
+      SCHEDULER_INTERVAL_SECONDS: "600"
     ports:
       - "5000:5000"
     depends_on:
       - db
+      - redis
     volumes:
       - .:/app
+
+  redis:
+    image: redis:7
+    restart: always
+    ports:
+      - "6379:6379"
 
 volumes:
   postgres_data:

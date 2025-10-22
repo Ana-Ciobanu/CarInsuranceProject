@@ -15,6 +15,7 @@ from api.routers.validity import blp as ValidityBlueprint
 from api.routers.owners import blp as owners_blp
 from db.base import db
 from core.logging import setup_logging
+from core.scheduling import start_scheduler
 
 def get_db_session():
     return SessionLocal()
@@ -35,7 +36,6 @@ def create_app(db_url=None):
     app.config["SQLALCHEMY_DATABASE_URI"] = db_url or os.getenv("DATABASE_URL")
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-    # Use custom engine if needed
     db.init_app(app)
     migrate = Migrate(app, db)
     from db.models import Car, Owner, InsurancePolicy, Claim
@@ -51,9 +51,7 @@ def create_app(db_url=None):
     api.register_blueprint(ValidityBlueprint)
     app.register_blueprint(owners_blp)
 
-    return app
+    if os.getenv("SCHEDULER_ENABLED", "True") == "True":
+        start_scheduler()
 
-# Alembic usage:
-# 1. Initialize migrations: flask db init
-# 2. Create migration: flask db migrate -m "Initial migration"
-# 3. Apply migration: flask db upgrade
+    return app
