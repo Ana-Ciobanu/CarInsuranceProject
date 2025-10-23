@@ -1,4 +1,4 @@
-from db.repositories import CarRepo, PolicyRepo
+from app.db.repositories import CarRepo, PolicyRepo
 from sqlalchemy.orm import Session
 
 def check_insurance_validity(db: Session, car_id: int, date):

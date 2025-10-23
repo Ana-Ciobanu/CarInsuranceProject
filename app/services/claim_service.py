@@ -1,4 +1,4 @@
-from db.repositories import ClaimRepo, CarRepo
+from app.db.repositories import ClaimRepo, CarRepo
 from sqlalchemy.orm import Session
 
 def create_claim(db: Session, car_id: int, claim_date, description, amount):

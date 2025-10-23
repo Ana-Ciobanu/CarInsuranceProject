@@ -1,8 +1,8 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.jobstores.redis import RedisJobStore
 from datetime import datetime, date
-from db.session import SessionLocal
-from db.models import InsurancePolicy
+from app.db.session import SessionLocal
+from app.db.models import InsurancePolicy
 import structlog
 import os
 from urllib.parse import urlparse

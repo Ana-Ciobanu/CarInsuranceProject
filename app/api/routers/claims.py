@@ -1,8 +1,8 @@
 from flask_smorest import Blueprint
 from flask.views import MethodView
 from flask import request, current_app
-from api.schemas import ClaimIn, ClaimOut
-from services.claim_service import create_claim
+from app.api.schemas import ClaimIn, ClaimOut
+from app.services.claim_service import create_claim
 import structlog
 
 blp = Blueprint("claims", "claims", url_prefix="/api/cars/<int:carId>/claims", description="Claims endpoints")

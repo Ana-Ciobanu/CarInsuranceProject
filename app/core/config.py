@@ -13,6 +13,16 @@ class Settings(BaseSettings):
     POOL_PRE_PING: bool = True
     POOL_SIZE: int = 5
     DB_TIMEOUT: int = 30
+    REDIS_URL: str = Field(default_factory=lambda: os.getenv("REDIS_URL"))
+    SCHEDULER_ENABLED: bool = Field(default_factory=lambda: os.getenv("SCHEDULER_ENABLED", "true").lower() == "true")
+    SCHEDULER_INTERVAL_SECONDS: int = Field(default_factory=lambda: int(os.getenv("SCHEDULER_INTERVAL_SECONDS", "600")))
+    API_TITLE: str = "Car Insurance Project"
+    API_VERSION: str = "v1"
+    OPENAPI_VERSION: str = "3.0.3"
+    OPENAPI_URL_PREFIX: str = "/"
+    OPENAPI_SWAGGER_UI_PATH: str = "/swagger-ui"
+    OPENAPI_SWAGGER_UI_URL: str = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
+    SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 

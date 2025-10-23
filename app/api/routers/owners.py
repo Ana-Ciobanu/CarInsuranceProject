@@ -1,8 +1,8 @@
 from flask_smorest import Blueprint
 from flask.views import MethodView
 from flask import request, current_app
-from api.schemas import OwnerIn, OwnerOut
-from db.models import Owner
+from app.api.schemas import OwnerIn, OwnerOut
+from app.db.models import Owner
 
 blp = Blueprint("owners", "owners", url_prefix="/api/owners", description="Owner endpoints")
 

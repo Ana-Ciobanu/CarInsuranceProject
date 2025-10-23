@@ -1,7 +1,7 @@
 from sqlalchemy import select, and_, func
 from sqlalchemy.orm import Session
 from datetime import date
-from db.models import Car, InsurancePolicy, Claim
+from app.db.models import Car, InsurancePolicy, Claim
 
 class CarRepo:
     def __init__(self, db: Session): self.db = db

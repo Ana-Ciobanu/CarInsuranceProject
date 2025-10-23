@@ -1,7 +1,7 @@
 from flask_smorest import Blueprint
 from flask.views import MethodView
 from flask import current_app
-from services.history_service import get_car_history
+from app.services.history_service import get_car_history
 
 blp = Blueprint("history", "history", url_prefix="/api/cars/<int:carId>/history", description="History endpoints")
 

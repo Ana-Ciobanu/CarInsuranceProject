@@ -1,4 +1,4 @@
-from db.repositories import ClaimRepo, PolicyRepo, CarRepo
+from app.db.repositories import ClaimRepo, PolicyRepo, CarRepo
 from sqlalchemy.orm import Session
 
 def get_car_history(db: Session, car_id: int):

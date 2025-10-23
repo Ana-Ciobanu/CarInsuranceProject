@@ -1,8 +1,8 @@
 from flask_smorest import Blueprint
 from flask.views import MethodView
 from flask import request, current_app
-from api.schemas import PolicyIn, PolicyOut
-from services.policy_service import create_policy
+from app.api.schemas import PolicyIn, PolicyOut
+from app.services.policy_service import create_policy
 import structlog
 
 blp = Blueprint("policies", "policies", url_prefix="/api/cars/<int:carId>/policies", description="Policy endpoints")

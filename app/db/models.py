@@ -1,7 +1,7 @@
 from datetime import date, datetime
 from sqlalchemy import String, Integer, Date, DateTime, ForeignKey, Numeric, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from db.base import db
+from app.db.base import db
 
 class Owner(db.Model):
     __tablename__ = "owner"

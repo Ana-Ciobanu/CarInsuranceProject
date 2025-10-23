@@ -1,9 +1,9 @@
 from flask_smorest import Blueprint
 from flask.views import MethodView
 from flask import request, current_app
-from api.schemas import InsuranceValidityOut
+from app.api.schemas import InsuranceValidityOut
 from datetime import date
-from services.validity_service import check_insurance_validity
+from app.services.validity_service import check_insurance_validity
 
 blp = Blueprint("validity", "validity", url_prefix="/api/cars/<int:carId>/insurance-valid", description="Insurance validity endpoints")
 

@@ -1,9 +1,9 @@
 from flask_smorest import Blueprint
 from flask.views import MethodView
 from flask import current_app, request
-from api.schemas import CarOut, OwnerOut, CarIn
-from db.repositories import CarRepo
-from db.models import Car, Owner
+from app.api.schemas import CarOut, OwnerOut, CarIn
+from app.db.repositories import CarRepo
+from app.db.models import Car, Owner
 
 blp = Blueprint("cars", "cars", url_prefix="/api/cars", description="Car endpoints")
 

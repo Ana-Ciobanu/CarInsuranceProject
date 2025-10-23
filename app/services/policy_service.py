@@ -1,4 +1,4 @@
-from db.repositories import PolicyRepo, CarRepo
+from app.db.repositories import PolicyRepo, CarRepo
 from sqlalchemy.orm import Session
 
 def create_policy(db: Session, car_id: int, start, end, provider):
