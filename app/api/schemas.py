@@ -53,7 +53,7 @@ class InsuranceValidityOut(BaseModel):
         return _check_date_range(v)
 
 class ClaimIn(BaseModel):
-    claimDate: date = Field(alias="claimDate")
+    claimDate: date = Field(alias="claim_date")
     description: str
     amount: Decimal
 

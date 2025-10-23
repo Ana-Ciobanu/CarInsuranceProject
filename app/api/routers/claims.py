@@ -9,12 +9,18 @@ blp = Blueprint("claims", "claims", url_prefix="/api/cars/<int:carId>/claims", d
 
 @blp.route("/", methods=["POST"])
 class ClaimCreate(MethodView):
-    @blp.arguments(ClaimIn)
-    @blp.response(201, lambda: ClaimOut)
-    def post(self, claim_in, carId):
+    def post(self, carId):
+        from flask import request
+        from pydantic import ValidationError
         db_session = current_app.session()
+        try:
+            claim_in = ClaimIn.model_validate(request.get_json())
+        except ValidationError as e:
+            db_session.close()
+            return {"message": "Invalid input", "errors": e.errors()}, 400
+
         claim, status = create_claim(
-            db_session, carId, claim_in.claimDate, claim_in.description, float(claim_in.amount)
+            db_session, carId, claim_in.claim_date, claim_in.description, float(claim_in.amount)
         )
         if status == 404:
             db_session.close()
@@ -30,7 +36,6 @@ class ClaimCreate(MethodView):
             amount=claim.amount,
             description=claim.description
         )
-        # location = f"/api/cars/{carId}/claims/{claim.id}"
         out = ClaimOut.model_validate(claim, from_attributes=True)
         db_session.close()
-        return out
+        return out.model_dump(by_alias=True), 201
