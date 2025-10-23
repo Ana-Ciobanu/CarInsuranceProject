@@ -1,5 +1,5 @@
 from sqlalchemy import select, and_, func
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, selectinload
 from datetime import date
 from app.db.models import Car, InsurancePolicy, Claim
 
@@ -10,8 +10,7 @@ class CarRepo:
         return self.db.get(Car, car_id)
 
     def list_with_owner(self) -> list[Car]:
-        # eager load owner
-        stmt = select(Car).join(Car.owner).order_by(Car.id)
+        stmt = select(Car).options(selectinload(Car.owner)).order_by(Car.id)
         return list(self.db.scalars(stmt))
 
 class PolicyRepo:

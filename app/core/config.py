@@ -19,8 +19,8 @@ class Settings(BaseSettings):
     API_TITLE: str = "Car Insurance Project"
     API_VERSION: str = "v1"
     OPENAPI_VERSION: str = "3.0.3"
-    OPENAPI_URL_PREFIX: str = "/"
-    OPENAPI_SWAGGER_UI_PATH: str = "/swagger-ui"
+    OPENAPI_URL_PREFIX: str = "/docs"
+    OPENAPI_SWAGGER_UI_PATH: str = "/"
     OPENAPI_SWAGGER_UI_URL: str = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
     SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
 

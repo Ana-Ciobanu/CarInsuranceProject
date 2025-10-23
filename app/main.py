@@ -6,6 +6,7 @@ from app.core.scheduling import start_scheduler
 from app.core.config import settings
 from app.db.base import db
 from app.db.session import SessionLocal, engine
+from app.api.schemas import CarOut, PolicyOut
 
 from app.api.routers.health import blp as HealthBlueprint
 from app.api.routers.cars import blp as CarsBlueprint

@@ -9,7 +9,7 @@ def _check_date_range(d: date):
 
 class OwnerIn(BaseModel):
     name: str
-    email: str | None = None
+    email: str | None = None #provider is optional, defaults to None
 
 class OwnerOut(BaseModel):
     id: int
@@ -40,6 +40,7 @@ class CarOut(BaseModel):
 
     class Config:
         populate_by_name = True
+        from_attributes = True
 
 class InsuranceValidityOut(BaseModel):
     carId: int
@@ -74,6 +75,9 @@ class ClaimOut(BaseModel):
     description: str
     amount: Decimal
 
+    class Config:
+        from_attributes = True
+
 class PolicyIn(BaseModel):
     startDate: date
     endDate: date
@@ -98,6 +102,9 @@ class PolicyOut(BaseModel):
     startDate: date
     endDate: date
     provider: str | None = None
+
+    class Config:
+        from_attributes = True
 
 class HistoryItemPolicy(BaseModel):
     type: str = "POLICY"
