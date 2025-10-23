@@ -1,6 +1,5 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field
-import os
 
 class Settings(BaseSettings):
     POSTGRES_USER: str 

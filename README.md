@@ -1,7 +1,7 @@
 # Car Insurance Project
 
 ## Overview
-This project is a for managing car insurance data, including cars, owners, claims, policies, and insurance validity. It is built with Flask, SQLAlchemy, and Pydantic, and is designed for production use with Gunicorn and Docker.
+This project is for managing car insurance data, including cars, owners, claims, policies, and insurance validity. It is built with Flask, SQLAlchemy, and Pydantic, and is designed for production use with Gunicorn and Docker.
 
 ## Features
 - Manage cars and owners

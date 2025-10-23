@@ -12,4 +12,3 @@ structlog
 apscheduler
 redis
 gunicorn>=21.0.0
-uvicorn

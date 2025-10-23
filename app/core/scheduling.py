@@ -6,10 +6,9 @@ from app.db.models import InsurancePolicy
 import structlog
 import os
 from urllib.parse import urlparse
+from app.core.config import settings
 
-# Read interval from environment or default to 600 seconds (10 minutes)
-INTERVAL_SECONDS = int(os.getenv("SCHEDULER_INTERVAL_SECONDS", "600"))
-REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+INTERVAL_SECONDS = settings.SCHEDULER_INTERVAL_SECONDS
 
 redis_url = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 parsed = urlparse(redis_url)
