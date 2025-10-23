@@ -1,8 +1,9 @@
 from flask_smorest import Blueprint
 from flask.views import MethodView
-from flask import request, current_app
+from flask import request
 from app.api.schemas import InsuranceValidityOut
 from datetime import date
+from app.db.session import get_session
 from app.services.validity_service import check_insurance_validity
 
 blp = Blueprint("validity", "validity", url_prefix="/api/cars/<int:carId>/insurance-valid", description="Insurance validity endpoints")
@@ -20,10 +21,10 @@ class InsuranceValid(MethodView):
         # Validate date range
         if not (date(1900,1,1) <= d_parsed <= date(2100,12,31)):
             return {"message": "Date out of allowed range (1900-2100)"}, 400
-        db_session = current_app.session()
-        valid, status = check_insurance_validity(db_session, carId, d_parsed)
-        db_session.close()
-        if status == 404:
-            return {"message": "Car not found"}, 404
-        resp = InsuranceValidityOut(carId=carId, date=d_parsed, valid=valid)
-        return resp.model_dump(by_alias=True), 200
+        
+        with get_session() as db_session:
+            valid, status = check_insurance_validity(db_session, carId, d_parsed)
+            if status == 404:
+                return {"message": "Car not found"}, 404
+            resp = InsuranceValidityOut(carId=carId, date=d_parsed, valid=valid)
+            return resp.model_dump(by_alias=True), 200

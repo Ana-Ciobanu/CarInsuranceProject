@@ -5,8 +5,8 @@ from app.core.logging import setup_logging
 from app.core.scheduling import start_scheduler
 from app.core.config import settings
 from app.db.base import db
+from app.api.schemas import CarIn, CarOut, PolicyIn, PolicyOut, OwnerIn, OwnerOut,ClaimIn, ClaimOut
 from app.db.session import SessionLocal, engine
-from app.api.schemas import CarOut, PolicyOut
 
 from app.api.routers.health import blp as HealthBlueprint
 from app.api.routers.cars import blp as CarsBlueprint
@@ -52,6 +52,9 @@ def create_app():
     if settings.SCHEDULER_ENABLED:
         with app.app_context():
             start_scheduler()
+
+    for schema in [CarIn, CarOut, PolicyIn, PolicyOut, OwnerIn, OwnerOut, ClaimIn, ClaimOut]:
+        api.spec.components.schema(schema.__name__, schema.model_json_schema())
 
     return app
 
