@@ -19,8 +19,8 @@ instance/
 # VS Code
 .vscode/
 
-# Migrations
-migrations/
+# # Migrations
+# migrations/
 
 # Database
 *.db
